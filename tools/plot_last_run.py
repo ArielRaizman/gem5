@@ -20,10 +20,10 @@ def parse_stats(path: str) -> Dict[str, float]:
     if not os.path.exists(path):
         return metrics
     pat = {
-        'IPC': re.compile(r'^system\.cpu\.ipc\s+(\S+)'),
-        'simTicks': re.compile(r'^simTicks\s+(\S+)'),
+        "IPC": re.compile(r"^system\.cpu\.ipc\s+(\S+)"),
+        "simTicks": re.compile(r"^simTicks\s+(\S+)"),
     }
-    with open(path, 'r') as fh:
+    with open(path) as fh:
         for line in fh:
             for key, rx in pat.items():
                 m = rx.match(line.strip())
@@ -36,9 +36,13 @@ def parse_stats(path: str) -> Dict[str, float]:
 
 
 def main():
-    ap = argparse.ArgumentParser(description='Plot IPC and simTicks from m5out_* directories.')
-    ap.add_argument('--dirs', nargs='+', default=['m5out_lru', 'm5out_aip', 'm5out_lvp'])
-    ap.add_argument('--out', default='parsec_results/last_run_metrics.png')
+    ap = argparse.ArgumentParser(
+        description="Plot IPC and simTicks from m5out_* directories."
+    )
+    ap.add_argument(
+        "--dirs", nargs="+", default=["m5out_lru", "m5out_aip", "m5out_lvp"]
+    )
+    ap.add_argument("--out", default="parsec_results/last_run_metrics.png")
     args = ap.parse_args()
 
     labels = []
@@ -47,18 +51,20 @@ def main():
     data = {}
 
     for d in args.dirs:
-        stats = parse_stats(os.path.join(d, 'stats.txt'))
-        label = d.replace('m5out_', '').upper()
+        stats = parse_stats(os.path.join(d, "stats.txt"))
+        label = d.replace("m5out_", "").upper()
         labels.append(label)
-        ipc.append(stats.get('IPC', 0.0))
-        ticks.append(stats.get('simTicks', 0.0))
+        ipc.append(stats.get("IPC", 0.0))
+        ticks.append(stats.get("simTicks", 0.0))
         data[label] = stats
 
     # Compute speedups vs LRU
-    base_ipc = data.get('LRU', {}).get('IPC') or data.get('M5OUT_LRU', {}).get('IPC')
+    base_ipc = data.get("LRU", {}).get("IPC") or data.get("M5OUT_LRU", {}).get(
+        "IPC"
+    )
     speedups = []
     for label in labels:
-        val = data.get(label, {}).get('IPC')
+        val = data.get(label, {}).get("IPC")
         if base_ipc and val:
             speedups.append((val / base_ipc - 1.0) * 100.0)
         else:
@@ -76,23 +82,23 @@ def main():
     fig, ax = plt.subplots(1, 2, figsize=(10, 4))
 
     # IPC bar
-    ax[0].bar(x, ipc, width, color='#1f77b4')
-    ax[0].set_title('IPC by Policy')
+    ax[0].bar(x, ipc, width, color="#1f77b4")
+    ax[0].set_title("IPC by Policy")
     ax[0].set_xticks(x, labels)
-    ax[0].set_ylabel('IPC')
+    ax[0].set_ylabel("IPC")
 
     # Speedup bar
-    ax[1].bar(x, speedups, width, color='#2ca02c')
-    ax[1].set_title('Speedup vs LRU (%)')
+    ax[1].bar(x, speedups, width, color="#2ca02c")
+    ax[1].set_title("Speedup vs LRU (%)")
     ax[1].set_xticks(x, labels)
-    ax[1].set_ylabel('%')
-    ax[1].axhline(0, color='black', linewidth=0.8)
+    ax[1].set_ylabel("%")
+    ax[1].axhline(0, color="black", linewidth=0.8)
 
     fig.tight_layout()
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
-    plt.savefig(args.out, bbox_inches='tight')
+    plt.savefig(args.out, bbox_inches="tight")
     print(f"wrote: {args.out}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
