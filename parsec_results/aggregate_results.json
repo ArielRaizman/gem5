@@ -1,0 +1,52 @@
+{
+  "gcc": {
+    "LRU": {},
+    "AIP": {},
+    "LvP": {}
+  },
+  "art": {
+    "LRU": {},
+    "AIP": {},
+    "LvP": {}
+  },
+  "mcf": {
+    "LRU": {},
+    "AIP": {},
+    "LvP": {}
+  },
+  "bzip2": {
+    "LRU": {},
+    "AIP": {},
+    "LvP": {}
+  },
+  "twolf": {
+    "LRU": {},
+    "AIP": {},
+    "LvP": {}
+  },
+  "swim": {
+    "LRU": {},
+    "AIP": {},
+    "LvP": {}
+  },
+  "mgrid": {
+    "LRU": {},
+    "AIP": {},
+    "LvP": {}
+  },
+  "vpr": {
+    "LRU": {},
+    "AIP": {},
+    "LvP": {}
+  },
+  "apsi": {
+    "LRU": {},
+    "AIP": {},
+    "LvP": {}
+  },
+  "ammp": {
+    "LRU": {},
+    "AIP": {},
+    "LvP": {}
+  }
+}

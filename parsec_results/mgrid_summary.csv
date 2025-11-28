@@ -1,0 +1,4 @@
+policy,ipc,l2_miss_rate,l2_misses,l2_accesses,sim_ticks,sim_insts
+LRU,,,,,,
+AIP,,,,,,
+LvP,,,,,,
