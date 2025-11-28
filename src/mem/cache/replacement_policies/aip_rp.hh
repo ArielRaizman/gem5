@@ -199,6 +199,18 @@ class AIP : public Base
      * @param candidates All entries in the accessed set.
      */
     void notifySetAccess(const ReplacementCandidates& candidates);
+
+        /**
+         * Update the prediction table on eviction of a block.
+         * Stores the block's present maximum as the new past maximum and
+         * updates the confidence based on stability.
+         *
+         * @param replacement_data Evicted block's replacement data.
+         * @param addr The evicted block's address for hashing.
+         */
+        void updateOnEviction(
+            const std::shared_ptr<ReplacementData>& replacement_data,
+            Addr addr);
 };
 
 } // namespace replacement_policy

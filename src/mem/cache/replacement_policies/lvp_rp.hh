@@ -191,6 +191,18 @@ class LvP : public Base
      * @return A shared pointer to the new replacement data.
      */
     std::shared_ptr<ReplacementData> instantiateEntry() override;
+
+    /**
+     * Update the prediction table on eviction of a block.
+     * Stores the block's final event counter as the new past maximum and
+     * updates confidence based on stability.
+     *
+     * @param replacement_data Evicted block's replacement data.
+     * @param addr The evicted block's address for hashing.
+     */
+    void updateOnEviction(
+        const std::shared_ptr<ReplacementData>& replacement_data,
+        Addr addr);
 };
 
 } // namespace replacement_policy

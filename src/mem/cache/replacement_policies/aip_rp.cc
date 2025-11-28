@@ -119,10 +119,18 @@ AIP::touch(const std::shared_ptr<ReplacementData>& replacement_data,
     auto casted_replacement_data =
         std::static_pointer_cast<AIPReplData>(replacement_data);
 
-    // Step 2: On cache hit, update present maximum and reset counter
+    // Step 2: On cache hit, update present maximum and reset counter.
+    // The access interval is the number of set accesses BETWEEN consecutive
+    // hits to this line. Since notifySetAccess increments all counters on
+    // every access (including this hit), subtract one to exclude the current
+    // access from the completed interval.
+    uint8_t completed_interval = casted_replacement_data->eventCounter;
+    if (completed_interval > 0) {
+        completed_interval -= 1;
+    }
     casted_replacement_data->maxCountPresent = std::max(
         casted_replacement_data->maxCountPresent,
-        casted_replacement_data->eventCounter);
+        completed_interval);
 
     // Reset event counter to start measuring next access interval
     casted_replacement_data->eventCounter = 0;
@@ -246,6 +254,25 @@ std::shared_ptr<ReplacementData>
 AIP::instantiateEntry()
 {
     return std::shared_ptr<ReplacementData>(new AIPReplData());
+}
+
+void
+AIP::updateOnEviction(
+    const std::shared_ptr<ReplacementData>& replacement_data,
+    Addr addr)
+{
+    auto evicted = std::static_pointer_cast<AIPReplData>(replacement_data);
+
+    // Index PT by stored hashedPC and hashed address of the evicted block
+    uint8_t hashed_pc = evicted->hashedPC;
+    uint8_t hashed_addr = hashAddress(addr);
+
+    auto &pt_entry = predictionTable[hashed_pc][hashed_addr];
+    const uint8_t old_past = pt_entry.maxCountPast;
+    const uint8_t new_past = evicted->maxCountPresent;
+
+    pt_entry.maxCountPast = new_past;
+    pt_entry.confidence = (new_past == old_past);
 }
 
 } // namespace replacement_policy

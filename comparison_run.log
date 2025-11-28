@@ -1,0 +1,38 @@
+================================================================================
+CACHE REPLACEMENT POLICY COMPARISON
+================================================================================
+
+Policies: LRU, AIP, LvP
+Workload: cache_stress
+Max Instructions: 10,000,000
+Output Directory: real_comparison
+
+Running simulations...
+--------------------------------------------------------------------------------
+  Running LRU... ✓ (0.5s)
+  Running AIP... ✓ (0.5s)
+  Running LvP... ✓ (0.5s)
+
+================================================================================
+GENERATING ANALYSIS
+================================================================================
+
+Creating comparison graphs...
+
+✓ Saved comparison graph: real_comparison/policy_comparison.png
+Creating detailed report...
+✓ Saved detailed report: real_comparison/comparison_report.txt
+
+================================================================================
+QUICK SUMMARY
+================================================================================
+
+LRU   : IPC=0.0608  Speedup=1.000x  L2 Miss=0.00%
+AIP   : IPC=0.0608  Speedup=1.000x  L2 Miss=0.00%
+LvP   : IPC=0.0608  Speedup=1.000x  L2 Miss=0.00%
+
+================================================================================
+✓ All results saved to: real_comparison/
+  - policy_comparison.png  (comprehensive graphs)
+  - comparison_report.txt  (detailed analysis)
+================================================================================

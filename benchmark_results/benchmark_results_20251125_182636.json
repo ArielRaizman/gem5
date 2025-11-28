@@ -1,0 +1,92 @@
+{
+  "ammp": {
+    "LRU": null,
+    "AIP": null,
+    "LvP": null,
+    "LFU": null,
+    "Random": null,
+    "BRRIP": null,
+    "SHiPPC": null
+  },
+  "apsi": {
+    "LRU": null,
+    "AIP": null,
+    "LvP": null,
+    "LFU": null,
+    "Random": null,
+    "BRRIP": null,
+    "SHiPPC": null
+  },
+  "art": {
+    "LRU": null,
+    "AIP": null,
+    "LvP": null,
+    "LFU": null,
+    "Random": null,
+    "BRRIP": null,
+    "SHiPPC": null
+  },
+  "bzip2": {
+    "LRU": null,
+    "AIP": null,
+    "LvP": null,
+    "LFU": null,
+    "Random": null,
+    "BRRIP": null,
+    "SHiPPC": null
+  },
+  "gcc": {
+    "LRU": null,
+    "AIP": null,
+    "LvP": null,
+    "LFU": null,
+    "Random": null,
+    "BRRIP": null,
+    "SHiPPC": null
+  },
+  "mcf": {
+    "LRU": null,
+    "AIP": null,
+    "LvP": null,
+    "LFU": null,
+    "Random": null,
+    "BRRIP": null,
+    "SHiPPC": null
+  },
+  "mgrid": {
+    "LRU": null,
+    "AIP": null,
+    "LvP": null,
+    "LFU": null,
+    "Random": null,
+    "BRRIP": null,
+    "SHiPPC": null
+  },
+  "swim": {
+    "LRU": null,
+    "AIP": null,
+    "LvP": null,
+    "LFU": null,
+    "Random": null,
+    "BRRIP": null,
+    "SHiPPC": null
+  },
+  "twolf": {
+    "LRU": null,
+    "AIP": null,
+    "LvP": null,
+    "LFU": null,
+    "Random": null,
+    "BRRIP": null,
+    "SHiPPC": null
+  },
+  "vpr": {
+    "LRU": null,
+    "AIP": null,
+    "LvP": null,
+    "LFU": null,
+    "Random": null,
+    "BRRIP": null,
+    "SHiPPC": null
+  }
+}

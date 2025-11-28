@@ -57,6 +57,8 @@
 #include "mem/cache/cache_blk.hh"
 #include "mem/cache/replacement_policies/base.hh"
 #include "mem/cache/replacement_policies/replaceable_entry.hh"
+#include "mem/cache/replacement_policies/aip_rp.hh"
+#include "mem/cache/replacement_policies/lvp_rp.hh"
 #include "mem/cache/tags/base.hh"
 #include "mem/cache/tags/indexing_policies/base.hh"
 #include "mem/cache/tags/partitioning_policies/partition_manager.hh"
@@ -129,6 +131,13 @@ class BaseSetAssoc : public BaseTags
     {
         CacheBlk *blk = findBlock({pkt->getAddr(), pkt->isSecure()});
 
+        // AIP requires per-set access notification on every access (hit/miss).
+        if (auto aip = dynamic_cast<replacement_policy::AIP*>(replacementPolicy)) {
+            std::vector<ReplaceableEntry*> entries =
+                indexingPolicy->getPossibleEntries({pkt->getAddr(), pkt->isSecure()});
+            aip->notifySetAccess(entries);
+        }
+
         // Access all tags in parallel, hence one in each way.  The data side
         // either accesses all blocks in parallel, or one block sequentially on
         // a hit.  Sequential access with a miss doesn't access data.
@@ -184,6 +193,16 @@ class BaseSetAssoc : public BaseTags
         // Choose replacement victim from replacement candidates
         CacheBlk* victim = entries.empty() ? nullptr :
             static_cast<CacheBlk*>(replacementPolicy->getVictim(entries));
+
+        // If a victim exists, update prediction tables for AIP/LvP
+        if (victim) {
+            const Addr victim_addr = regenerateBlkAddr(victim);
+            if (auto aip = dynamic_cast<replacement_policy::AIP*>(replacementPolicy)) {
+                aip->updateOnEviction(victim->replacementData, victim_addr);
+            } else if (auto lvp = dynamic_cast<replacement_policy::LvP*>(replacementPolicy)) {
+                lvp->updateOnEviction(victim->replacementData, victim_addr);
+            }
+        }
 
         // There is only one eviction for this replacement
         evict_blks.push_back(victim);

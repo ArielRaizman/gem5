@@ -1,0 +1,129 @@
+================================================================================
+CACHE REPLACEMENT POLICY COMPARISON REPORT
+================================================================================
+
+Policies Tested: LRU (baseline), AIP, LvP
+Generated: 2025-11-25 19:06:55
+
+--------------------------------------------------------------------------------
+1. PERFORMANCE METRICS
+--------------------------------------------------------------------------------
+
+LRU:
+  IPC: 0.3031
+  Speedup vs LRU: 1.000x (+0.0%)
+  Execution Time: 0.00 ms
+  Instructions: 0
+
+AIP:
+  IPC: 0.3031
+  Speedup vs LRU: 1.000x (+0.0%)
+  Execution Time: 0.00 ms
+  Instructions: 0
+
+LvP:
+  IPC: 0.3031
+  Speedup vs LRU: 1.000x (+0.0%)
+  Execution Time: 0.00 ms
+  Instructions: 0
+
+--------------------------------------------------------------------------------
+2. CACHE PERFORMANCE
+--------------------------------------------------------------------------------
+
+LRU:
+  L1 I-Cache:
+    Accesses: 22905
+    Hits: 21773
+    Misses: 1132
+    Miss Rate: 4.94%
+  L1 D-Cache:
+    Accesses: 31442
+    Hits: 27973
+    Misses: 3469
+    Miss Rate: 11.03%
+  L2 Cache:
+    Accesses: 2399
+    Hits: 149
+    Misses: 2250
+    Miss Rate: 93.79%
+
+AIP:
+  L1 I-Cache:
+    Accesses: 22905
+    Hits: 21773
+    Misses: 1132
+    Miss Rate: 4.94%
+  L1 D-Cache:
+    Accesses: 31442
+    Hits: 27973
+    Misses: 3469
+    Miss Rate: 11.03%
+  L2 Cache:
+    Accesses: 2399
+    Hits: 149
+    Misses: 2250
+    Miss Rate: 93.79%
+
+LvP:
+  L1 I-Cache:
+    Accesses: 22905
+    Hits: 21773
+    Misses: 1132
+    Miss Rate: 4.94%
+  L1 D-Cache:
+    Accesses: 31442
+    Hits: 27973
+    Misses: 3469
+    Miss Rate: 11.03%
+  L2 Cache:
+    Accesses: 2399
+    Hits: 149
+    Misses: 2250
+    Miss Rate: 93.79%
+
+--------------------------------------------------------------------------------
+3. MEMORY TRAFFIC
+--------------------------------------------------------------------------------
+
+LRU:
+  Memory Reads: 0
+  Memory Writes: 0
+  Total Memory Operations: 0
+
+AIP:
+  Memory Reads: 0
+  Memory Writes: 0
+  Total Memory Operations: 0
+
+LvP:
+  Memory Reads: 0
+  Memory Writes: 0
+  Total Memory Operations: 0
+
+--------------------------------------------------------------------------------
+4. COMPARATIVE ANALYSIS
+--------------------------------------------------------------------------------
+
+L2 Miss Rate Reduction:
+  AIP vs LRU: 0.00 percentage points (+0.0%)
+  LvP vs LRU: 0.00 percentage points (+0.0%)
+
+Memory Read Reduction:
+  AIP: 0 reads
+  LvP: 0 reads
+  (No memory reads in workload)
+
+--------------------------------------------------------------------------------
+5. SUMMARY
+--------------------------------------------------------------------------------
+
+Best Overall Performance: LRU
+  Highest IPC: 0.3031
+  Speedup vs LRU: 1.000x
+
+Key Findings:
+
+================================================================================
+END OF REPORT
+================================================================================

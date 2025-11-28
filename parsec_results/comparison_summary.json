@@ -1,0 +1,26 @@
+{
+  "LRU": {
+    "sim_ticks": 1540404747600,
+    "sim_insts": 1000000000,
+    "ipc": 0.129836,
+    "l2_misses": 21094456,
+    "l2_accesses": 21094707,
+    "l2_miss_rate": 0.999988
+  },
+  "AIP": {
+    "sim_ticks": 1534067453800,
+    "sim_insts": 1000000000,
+    "ipc": 0.130372,
+    "l2_misses": 20977763,
+    "l2_accesses": 21094707,
+    "l2_miss_rate": 0.994456
+  },
+  "LvP": {
+    "sim_ticks": 1534114108400,
+    "sim_insts": 1000000000,
+    "ipc": 0.130368,
+    "l2_misses": 20977720,
+    "l2_accesses": 21094707,
+    "l2_miss_rate": 0.994454
+  }
+}

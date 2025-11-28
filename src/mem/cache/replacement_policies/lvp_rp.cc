@@ -230,5 +230,24 @@ LvP::instantiateEntry()
     return std::shared_ptr<ReplacementData>(new LvPReplData());
 }
 
+void
+LvP::updateOnEviction(
+    const std::shared_ptr<ReplacementData>& replacement_data,
+    Addr addr)
+{
+    auto evicted = std::static_pointer_cast<LvPReplData>(replacement_data);
+
+    // Index PT by stored hashedPC and hashed address of the evicted block
+    uint8_t hashed_pc = evicted->hashedPC;
+    uint8_t hashed_addr = hashAddress(addr);
+
+    auto &pt_entry = predictionTable[hashed_pc][hashed_addr];
+    const uint8_t old_past = pt_entry.maxCountPast;
+    const uint8_t new_past = evicted->eventCounter;
+
+    pt_entry.maxCountPast = new_past;
+    pt_entry.confidence = (new_past == old_past);
+}
+
 } // namespace replacement_policy
 } // namespace gem5
